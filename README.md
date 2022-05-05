@@ -5,7 +5,6 @@ This repo provides different pytorch implementation for training a deep learning
   3. A [Pytorch-ligtning implementation](#pytorch-lightning-implementation) along with tracking and visualization in TensorBoard
   4. A [Pytorch-ligtning Hydra implementation](#pytorch-lightning-hydra-implementation) for rapid experimentation and prototyping using new models/datasets
 
-## Folder structure
 ## Folder Structure
   ```
   pytorch-templates/
@@ -26,11 +25,11 @@ This repo provides different pytorch implementation for training a deep learning
       └── ...
   ```
   
-# Single-GPU implementation
+## Single-GPU implementation
 
-# Multi-GPU implementation
+## Multi-GPU implementation
 
-# Pytorch-lightning implementation
+## Pytorch-lightning implementation
 
-# Pytorch-lightning Hydra implementation
+## Pytorch-lightning Hydra implementation
 
