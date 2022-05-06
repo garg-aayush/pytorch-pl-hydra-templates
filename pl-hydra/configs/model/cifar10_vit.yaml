@@ -1,0 +1,13 @@
+_target_: src.models.cifar10_module.CIFAR10LitModule
+
+net:
+  _target_: src.models.components.vit.VisionTransformer
+  num_classes: 10
+  num_heads: 8
+  num_layers: 6
+  num_channels: 3
+  num_patches: 64
+  patch_size: 4
+  embed_dim: 256
+  hidden_dim: 512
+  dropout: 0.2

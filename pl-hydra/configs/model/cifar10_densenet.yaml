@@ -1,0 +1,10 @@
+_target_: src.models.cifar10_module.CIFAR10LitModule
+
+net:
+  _target_: src.models.components.densenet.DenseNet
+  num_classes: 10
+  num_layers: [6,6,6,6]
+  bn_size: 2
+  growth_rate: 16
+  act_fn_by_name: relu
+

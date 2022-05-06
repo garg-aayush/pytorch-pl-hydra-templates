@@ -1,0 +1,11 @@
+_target_: src.datamodules.cifar10_datamodule.CIFAR10DataModule
+
+data_dir: ${data_dir} # data_dir is specified in config.yaml
+batch_size: 128
+num_workers: 4
+pin_memory: True
+data_mean: [0.49421428, 0.48513139, 0.45040909]
+data_std: [0.24665252, 0.24289226, 0.26159238]
+image_size: [32, 32]
+scale_bounds: [0.8, 1.0]
+aspect_bounds: [0.9, 1.1]

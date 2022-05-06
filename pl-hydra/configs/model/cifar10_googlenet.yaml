@@ -1,0 +1,6 @@
+_target_: src.models.cifar10_module.CIFAR10LitModule
+
+net:
+  _target_: src.models.components.googlenet.GoogleNet
+  num_classes: 10
+  act_fn_by_name: relu
