@@ -44,7 +44,7 @@ defaults:
 
 # default name for the experiment, determines logging folder path
 # (you can overwrite this name in experiment configs)
-name: "resnet"
+name: "test"
 
 # path to original working directory
 # hydra hijacks working directory by changing it to the new log directory

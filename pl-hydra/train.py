@@ -6,8 +6,8 @@ import dotenv
 import hydra
 from omegaconf import DictConfig
 import os
-# Set the visible GPUs (curent machine has 16 GPUS [0-15])
-os.environ["CUDA_VISIBLE_DEVICES"]="11"
+# # Set the visible GPUs (curent machine has 16 GPUS [0-15])
+# os.environ["CUDA_VISIBLE_DEVICES"]="11"
 
 # load environment variables from `.env` file if it exists
 # recursively searches for `.env` in all folders starting from work dir

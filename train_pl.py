@@ -40,9 +40,9 @@ from utils.ResNet import ResNet
 from utils.helper import set_random_seed, print_info, evaluate
 from utils.plotter import plot_cm, plot_preds
 
-# Set the visible GPUs, in case of multi-GPU device, otherwise comment it
-# you can use `nvidia-smi` in terminal to see the available GPUS
-os.environ["CUDA_VISIBLE_DEVICES"]="13,14,15,16"
+# # Set the visible GPUs, in case of multi-GPU device, otherwise comment it
+# # you can use `nvidia-smi` in terminal to see the available GPUS
+# os.environ["CUDA_VISIBLE_DEVICES"]="13,14,15,16"
 
 ######################################################################
 # Set the Global values
@@ -55,6 +55,7 @@ ASPECT_BOUNDS = (0.9,1.1) # lower & upper bounds
 # Path to the folder where the datasets are/should be downloaded (e.g. CIFAR10)
 DATASET_PATH = "../data"
 LOG_PATH = "./logs"
+os.makedirs(CHECKPOINT_PATH,exist_ok=True)
 
 # Path to the folder where the models will be saved
 CHECKPOINT_PATH = "../saved_models/pl/"
