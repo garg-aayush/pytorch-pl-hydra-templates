@@ -6,6 +6,8 @@ This repo provides different pytorch implementation for training a deep learning
   4. A [Pytorch-ligtning Hydra implementation](#pytorch-lightning-hydra-implementation) for rapid experimentation and prototyping using new models/datasets
 
 ## Quickstart
+#### Setting up the environment
+
 ```
 # clone project
 git clone https://https://github.com/garg-aayush/pytorch-pl-hydra-templates
@@ -18,8 +20,8 @@ conda activate pl_hydra
 # install requirements
 pip install -r requirements.txt
 ```
+</details>
 
-## Quickstart
 <details> 
 <summary><b>Folder structure</b></summary>
   
@@ -46,28 +48,13 @@ pip install -r requirements.txt
   
 </details>
 
-<details> 
-<summary><b>Setting up the environment</b></summary>
 
-```
-# clone project
-git clone https://https://github.com/garg-aayush/pytorch-pl-hydra-templates
-cd pytorch-pl-hydra-templates
-
-# create conda environment
-conda create -n pl_hydra python=3.8
-conda activate pl_hydra
-
-# install requirements
-pip install -r requirements.txt
-```
-</details>
   
 ## Single-GPU implementation
-`train_simple.py` is a very vanilla [pytorch](https://pytorch.org/) implementation that can either run on a CPU or a single GPU. The code uses own simple functions to log different metrics, print out info at run time and save the model at the end of the run. Furthermore, the [Argparse](https://docs.python.org/3/library/argparse.html) module is used to parse the arguments through commandline. 
+`train_simple.py` is a vanilla [pytorch](https://pytorch.org/) implementation that can either run on a CPU or a single GPU. The code uses own simple functions to log different metrics, print out info at run time and save the model at the end of the run. Furthermore, the [argparse](https://docs.python.org/3/library/argparse.html) module is used to parse the arguments through command line. 
 
 <details>
-<summary><b>Arguments that can be passed through commandline</b></summary>
+<summary><b>Command line arguments</b></summary>
 
 > Use `python <python_file> -h` to see the available parser arguments for any script. 
 
@@ -103,13 +90,13 @@ optional arguments:
 <summary><b>Running the script</b></summary>
   
 ```
-# Start training with default parameters: 
+# Train with default parameters: 
 python train_simple.py --run_name=test_single
 
-# You can either parameters through commandline, for e.g.:
+# Train by passing parameters in command line, for e.g.:
 python train_simple.py -bs=64 -ep=2 --run_name=test_single
 
-# You can also set parameters run_simple.sh file and start the training as following:
+# You can also set parameters run_simple.sh file and train:
 source train_simple.py
 ```
   
@@ -119,10 +106,10 @@ NOTE: remember to set the data folder path (`DATASET_PATH`) and model checkpoint
 
 
 ## Multi-GPU implementation
-`train_multi.py` is a multi-GPU [pytorch](https://pytorch.org/) implementation that  uses Pytorch's [Distributed Data Parallel (DDP)](https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html) for data parallelism. The code is almost similar to You can either run on a CPU or a single GPU or multiple-GPUS. The code is very similar to [single-GPU implementation](#single-gpu-implementation) except the use of DDP and Distributed sampler.
+`train_multi.py` is a multi-GPU [pytorch](https://pytorch.org/) implementation that uses Pytorch's [Distributed Data Parallel (DDP)](https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html) for data parallelism. The code is almost similar to You can either run on a CPU or a single GPU or multiple-GPUS. The code is very similar to [single-GPU implementation](#single-gpu-implementation) except the use of DDP and Distributed sampler.
 
 <details>
-<summary><b>Arguments that can be passed through commandline</b></summary>
+<summary><b>Command line arguments</b></summary>
 
 > Use `python <python_file> -h` to see the available parser arguments for any script. 
 
@@ -159,13 +146,13 @@ optional arguments:
 <summary><b>Running the script</b></summary>
   
 ```
-# Training with default parameters and 2 GPU: 
+# Train with default parameters and 2 GPU: 
 python -m torch.distributed.launch --nproc_per_node=2 --master_port=9995 train_multi.py --run_name=test_multi
 
-# You can also pass parameters through commandline (single GPU training), for e.g.:
+# Traing by passing parameters in command line (single GPU training), for e.g.:
 python -m torch.distributed.launch --nproc_per_node=1 --master_port=9995 train_multi.py -ep=5 --run_name=test_multi
 
-# You can also set parameters in run_multi.sh file and start the training as following:
+# You can also set parameters in run_multi.sh file and train:
 source train_multi.py
 ```
   
@@ -174,10 +161,10 @@ source train_multi.py
 NOTE: remember to set the data folder path (`DATASET_PATH`) and model checkpoint path (`CHECKPOINT_PATH`) in the `train_simple.py`
 
 ## Pytorch-lightning implementation
-`train_pl.py` is a [pytorch-lightning](https://www.pytorchlightning.ai/) implementation that helps to organize the code neatly and provides lot of logging, metrics and multi-platform run features. The code is organised by creating a separate [Pytorch ligtning module class](https://pytorch-lightning.readthedocs.io/en/latest/common/lightning_module.html) and a separate [Pyotrch lightning datamodule class](https://pytorch-lightning.readthedocs.io/en/stable/extensions/datamodules.html). Moreover, here we log all the metrics, the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) and validation/test prediction images at each epoch. All this logging info can be viewed using the [Tensorboard](https://www.tensorflow.org/tensorboard).
+`train_pl.py` is a [pytorch-lightning](https://www.pytorchlightning.ai/) implementation that helps to organize the code neatly and provides lot of logging, metrics and multi-platform run features. The code is organised by creating a separate [Pytorch lightning module class](https://pytorch-lightning.readthedocs.io/en/latest/common/lightning_module.html) and a separate [Pyotrch lightning datamodule class](https://pytorch-lightning.readthedocs.io/en/stable/extensions/datamodules.html). Moreover, all the metrics, the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) and validation/test prediction images are logged at each epoch. All this logging info can be viewed using the [Tensorboard](https://www.tensorflow.org/tensorboard).
 
 <details> and a contains all the ta
-<summary><b>Commandline arguments</b></summary>
+<summary><b>Command line arguments</b></summary>
 
 > Use `python <python_file> -h` to see the available parser arguments for any script. 
 
@@ -210,10 +197,10 @@ optional arguments:
 <summary><b>Running the script</b></summary>
   
 ```bash
-# Training with 1 GPU:
+# Train with 1 GPU:
 python train_pl.py --epochs=5 --run_name=test_pl --gpus=1
 
-# Training with 2 GPUs:
+# Train with 2 GPUs:
 python train_pl.py --epochs=5 --run_name=test_pl --gpus=2
 ```
 
@@ -231,7 +218,7 @@ tensorboard --logdir ./logs/
 NOTE: remember to set the data folder path (`DATASET_PATH`) and model checkpoint path (`CHECKPOINT_PATH`) in the `train_simple.py`
 
 ## Pytorch-lightning Hydra implementation
-`pl_hydra/` contains all the code pertaining to pl-hydra implementation. This implementation is based on [Ashleve's lightning-hydra-template](https://github.com/ashleve/lightning-hydra-template). The template allows fast experimentation by making the use of [pytorch-lightning](https://www.pytorchlightning.ai) to organize the code and [hydra](https://hydra.cc/) to compose the configuration files that can be used to define different target, pass arguments, etc. for the run. Thus, avoiding the need to maintain multiple configuration files.
+`pl_hydra/` contains all the code pertaining to pytorch-lightning hydra implementation. This implementation is based on [Ashleve's lightning-hydra-template](https://github.com/ashleve/lightning-hydra-template). The template allows fast experimentation by making the use of [pytorch-lightning](https://www.pytorchlightning.ai) to organize the code and [hydra](https://hydra.cc/) to compose the configuration files that can be used to define different target, pass arguments, etc. for the run. Thus, avoiding the need to maintain multiple configuration files.
 
 <details> 
 <summary><b>pl_hydra folder structure</b></summary>
@@ -278,7 +265,7 @@ pl_hydra
 ```
 </details>
 
-The code useds multiple config files to instantiate datamodules, optimizers, etc. and to pass arguments. 
+The code uses multiple config files to instantiate datamodules, optimizers, etc. and to pass arguments. 
 
 The [train.yaml](pl_hydra/configs/train.yaml) is the main config file that contains default training configuration.
 It determines how config is composed when simply executing command `python train.py`.
@@ -361,7 +348,7 @@ seed: 100
 ```
 </details>
 
-Apart from the main config, there are separate configs for optimizers, modules, dataloaders and loggers. For example, this is a optimizer config:
+Apart from the main config, there are separate configs for optimizers, modules, dataloaders, loggers, etc. For example, this is a optimizer config:
 <details>
 <summary><b>Show example optimizer config</b></summary>
 
@@ -383,7 +370,7 @@ lr_scheduler:
 
 </details>
 
-This helps to maintain and use different optimizers. In order to use a different optimizer, just specfiy the different optimizer and corresponding parameters in the optim izerconfig file, or else, just write a different optimizer config file and add path to [pl_hydra/configs/train.yaml](pl_hydra/configs/train.yaml).
+This helps to maintain and use different optimizers. In order to use a different optimizer, just specfiy the different optimizer and corresponding parameters in the optim izerconfig file, or else, just write a different optimizer config file and add path to [pl_hydra/configs/train.yaml](pl_hydra/configs/train.yaml). The similar approach can be taken to use different data modules and models.
 
 <details> 
 <summary><b>Running the script</b></summary>
@@ -392,7 +379,7 @@ This helps to maintain and use different optimizers. In order to use a different
 # Note: make sure to go to pl_hydra first
 cd pl_hydra
 
-# Training with default parameters:
+# Train with default parameters:
 python train.py
 
 # train on 1 GPU
@@ -402,7 +389,7 @@ python train.py trainer.gpus=1
 python train.py trainer.gpus=2 +trainer.strategy=ddp
 
 # train model using googlenet architecture and adam optimizer
-python train.py model=googlenet optim=optim_adam
+python train.py model=cifar10_googlenet optim=optim_adam
 ```
   
 </details>
