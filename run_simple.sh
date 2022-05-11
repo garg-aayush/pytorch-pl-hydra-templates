@@ -5,7 +5,6 @@ run_name='train_simple.py'
 logfile=./logs/train_simple.log
 train_script='train_simple.py'
 ngpus=1
-port=9994
 epochs=150
 epochs_per_test=1
 batch_size=128

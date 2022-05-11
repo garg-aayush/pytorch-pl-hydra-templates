@@ -130,3 +130,6 @@ dmypy.json
 
 # don't save logs
 logs/
+
+# don't save vscode settings
+.vscode/
