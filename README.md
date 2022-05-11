@@ -26,6 +26,13 @@ This repo provides different pytorch implementation for training a deep learning
   ```
   
 ## Single-GPU implementation
+This is a very vanilla [pytorch](https://pytorch.org/) implementation that can either run on a CPU or a single GPU. The code uses own simple functions to log different metrics, print out info at run time and save the model at the end of the run. Furthermore, the [Argparse](https://docs.python.org/3/library/argparse.html) module is used to parse the arguments through commandline. 
+
+<details>
+<summary><b>Arguments that can be passed through commandline</b></summary>
+
+> Use `python <python_file> -h` to see the available parser arguments for any script. 
+
 ```
 usage: train_simple.py [-h] --run_name RUN_NAME [--random_seed RANDOM_SEED]
                        [-et EPOCHS_PER_TEST] [-ep EPOCHS] [-bs BATCH_SIZE]
@@ -33,10 +40,12 @@ usage: train_simple.py [-h] --run_name RUN_NAME [--random_seed RANDOM_SEED]
                        [--weight_decay WEIGHT_DECAY] [--momentum MOMENTUM]
                        [--gamma GAMMA]
 
+required arguments:
+  --run_name RUN_NAME
+  
 optional arguments:
   -h, --help            show this help message and exit
   --run_name RUN_NAME
-  --random_seed RANDOM_SEED
   -et EPOCHS_PER_TEST, --epochs_per_test EPOCHS_PER_TEST
                         Number of epochs per test/val
   -ep EPOCHS, --epochs EPOCHS
@@ -50,7 +59,11 @@ optional arguments:
   --momentum MOMENTUM   Momentum value in SGD.
   --gamma GAMMA         gamma value for MultiStepLR.
 ```
+</details>
 
+<details> 
+<summary><b>Running the script</b></summary>
+  
 ```
 # Start training with default parameters: 
 python train_simple.py --run_name=test_single
@@ -61,8 +74,14 @@ python train_simple.py -bs=64 -ep=2 --run_name=test_single
 # You can also set parameters run_simple.sh file and start the training as following:
 source train_simple.py
 ```
+  
+</details>
+ 
+NOTE: remember to set the data folder path (`DATASET_PATH`) and model checkpoint path (`CHECKPOINT_PATH`) in the `train_simple.py`
+
 
 ## Multi-GPU implementation
+This is a very vanilla [pytorch](https://pytorch.org/) implementation that can either run on a CPU or a single GPU. The code uses own simple functions to log different metrics, print out info at run time and save the model at the end of the run. Furthermore, the [Argparse](https://docs.python.org/3/library/argparse.html) module is used to parse the arguments through commandline. 
 ```
 # Training with default parameters and 2 GPU: 
 python -m torch.distributed.launch --nproc_per_node=2 --master_port=9995 train_multi.py --run_name=test_multi
